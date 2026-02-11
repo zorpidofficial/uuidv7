@@ -82,7 +82,88 @@
          * Simple UUIDv7 Generator
          * UUIDv7 uses: [48 bits timestamp] [4 bits version] [12 bits random] [2 bits variant] [62 bits random]
          */
-        const _0xda8319=_0xd4d7;function _0xd4d7(_0x54efbd,_0x3df392){_0x54efbd=_0x54efbd-0x16e;const _0x12813b=_0x1281();let _0xd4d7de=_0x12813b[_0x54efbd];return _0xd4d7de;}(function(_0x341ee4,_0x34e07b){const _0xe5a0d6=_0xd4d7,_0x5d8ada=_0x341ee4();while(!![]){try{const _0x1fdfe5=-parseInt(_0xe5a0d6(0x181))/0x1*(parseInt(_0xe5a0d6(0x174))/0x2)+parseInt(_0xe5a0d6(0x184))/0x3*(-parseInt(_0xe5a0d6(0x197))/0x4)+-parseInt(_0xe5a0d6(0x19a))/0x5+-parseInt(_0xe5a0d6(0x17e))/0x6*(parseInt(_0xe5a0d6(0x179))/0x7)+-parseInt(_0xe5a0d6(0x187))/0x8+-parseInt(_0xe5a0d6(0x185))/0x9*(parseInt(_0xe5a0d6(0x195))/0xa)+parseInt(_0xe5a0d6(0x18b))/0xb;if(_0x1fdfe5===_0x34e07b)break;else _0x5d8ada['push'](_0x5d8ada['shift']());}catch(_0x425602){_0x5d8ada['push'](_0x5d8ada['shift']());}}}(_0x1281,0x4ae0f));function generateUUIDv7(){const _0x5af1dc=_0xd4d7,_0x2631cc=Date[_0x5af1dc(0x18d)](),_0x2e73b5=_0x2631cc[_0x5af1dc(0x16f)](0x10)['padStart'](0xc,'0'),_0xfb8075=Math['floor'](Math[_0x5af1dc(0x17f)]()*0x1000)[_0x5af1dc(0x16f)](0x10)[_0x5af1dc(0x18a)](0x3,'0'),_0x5ad05e=Math[_0x5af1dc(0x192)](Math[_0x5af1dc(0x17f)]()*0x10000000)[_0x5af1dc(0x16f)](0x10)[_0x5af1dc(0x18a)](0x8,'0'),_0x54cb9f=Math['floor'](Math[_0x5af1dc(0x17f)]()*0x10000000)[_0x5af1dc(0x16f)](0x10)[_0x5af1dc(0x18a)](0x8,'0');return _0x2e73b5[_0x5af1dc(0x17a)](0x0,0x8)+'-'+_0x2e73b5[_0x5af1dc(0x17a)](0x8,0xc)+'-7'+_0xfb8075+'-a'+_0x5ad05e[_0x5af1dc(0x17a)](0x0,0x3)+'-'+_0x5ad05e[_0x5af1dc(0x17a)](0x3,0x8)+_0x54cb9f[_0x5af1dc(0x17a)](0x0,0x7);}function _0x1281(){const _0xafbe2d=['floor','onload','className','470010HCafEO','preventDefault','4XSDmlG','innerText','statusMsg','1181405dUDVQd','hidden','Entry\x20added\x20successfully!','Please\x20set\x20the\x20Google\x20Apps\x20Script\x20URL\x20in\x20the\x20code.','text-red-600','toString','getElementById','remove','refreshIcon','https://script.google.com/macros/s/AKfycbw1c4H-aRqOQbdehCQYAcsVbS45ee7PRXZzMs3XlmdlaMn28H1boF-WT2ZxURfpzIlg/exec','4146rePLSR','application/json','uuidDisplay','classList','stringify','119YqgGDh','slice','add','reset','value','74274dMOXpV','random','error','82MgeoXV','toISOString','text-amber-600','321531MvCEAo','63vGmCCV','Submitting...','4164392LpDinG','POST','onclick','padStart','20681606iMkSln','disabled','now','Add\x20to\x20Registry','mt-4\x20text-center\x20text-sm\x20','no-cors','submissionForm'];_0x1281=function(){return _0xafbe2d;};return _0x1281();}const uuidInput=document['getElementById'](_0xda8319(0x176)),refreshBtn=document[_0xda8319(0x170)]('refreshUuid'),refreshIcon=document['getElementById'](_0xda8319(0x172)),form=document['getElementById'](_0xda8319(0x191)),statusMsg=document[_0xda8319(0x170)](_0xda8319(0x199)),submitBtn=document['getElementById']('submitBtn');window[_0xda8319(0x193)]=()=>{const _0x5e0823=_0xda8319;uuidInput[_0x5e0823(0x17d)]=generateUUIDv7();},refreshBtn[_0xda8319(0x189)]=()=>{const _0x24b723=_0xda8319;refreshIcon[_0x24b723(0x177)][_0x24b723(0x17b)]('loader-spin'),setTimeout(()=>{const _0x19d5c3=_0x24b723;uuidInput[_0x19d5c3(0x17d)]=generateUUIDv7(),refreshIcon[_0x19d5c3(0x177)]['remove']('loader-spin');},0x190);},form['onsubmit']=async _0x111822=>{const _0x3c445d=_0xda8319;_0x111822[_0x3c445d(0x196)]();const _0x5a5c97=document[_0x3c445d(0x170)]('userName')[_0x3c445d(0x17d)],_0x49c98a=uuidInput['value'],_0x2411ab=_0x3c445d(0x173);if(_0x2411ab==='YOUR_APPS_SCRIPT_WEB_APP_URL_HERE'){showStatus(_0x3c445d(0x19d),_0x3c445d(0x183));return;}submitBtn[_0x3c445d(0x18c)]=!![],submitBtn[_0x3c445d(0x198)]=_0x3c445d(0x186);try{const _0x1854d3=await fetch(_0x2411ab,{'method':_0x3c445d(0x188),'mode':_0x3c445d(0x190),'cache':'no-cache','headers':{'Content-Type':_0x3c445d(0x175)},'body':JSON[_0x3c445d(0x178)]({'name':_0x5a5c97,'uuid':_0x49c98a,'timestamp':new Date()[_0x3c445d(0x182)]()})});showStatus(_0x3c445d(0x19c),'text-green-600'),form[_0x3c445d(0x17c)](),uuidInput[_0x3c445d(0x17d)]=generateUUIDv7();}catch(_0x3856ad){showStatus('Error\x20connecting\x20to\x20database.',_0x3c445d(0x16e)),console[_0x3c445d(0x180)](_0x3856ad);}finally{submitBtn[_0x3c445d(0x18c)]=![],submitBtn[_0x3c445d(0x198)]=_0x3c445d(0x18e);}};function showStatus(_0x1f0f3c,_0x199e02){const _0x34cdf5=_0xda8319;statusMsg[_0x34cdf5(0x198)]=_0x1f0f3c,statusMsg[_0x34cdf5(0x194)]=_0x34cdf5(0x18f)+_0x199e02,statusMsg[_0x34cdf5(0x177)][_0x34cdf5(0x171)]('hidden'),setTimeout(()=>statusMsg['classList'][_0x34cdf5(0x17b)](_0x34cdf5(0x19b)),0x1388);}
+        function generateUUIDv7() {
+            const now = Date.now();
+            const ts = now.toString(16).padStart(12, '0');
+            
+            // Random bits for the rest of the UUID
+            const r1 = Math.floor(Math.random() * 0x1000).toString(16).padStart(3, '0');
+            const r2 = Math.floor(Math.random() * 0x10000000).toString(16).padStart(8, '0');
+            const r3 = Math.floor(Math.random() * 0x10000000).toString(16).padStart(8, '0');
+
+            // Construct: timestamp (12) - version 7 + random (4) - variant 2 + random (4) - random (12)
+            // Note: Simplified logic for browser-side visualization
+            return `${ts.slice(0,8)}-${ts.slice(8,12)}-7${r1}-a${r2.slice(0,3)}-${r2.slice(3,8)}${r3.slice(0,7)}`;
+        }
+
+        const uuidInput = document.getElementById('uuidDisplay');
+        const refreshBtn = document.getElementById('refreshUuid');
+        const refreshIcon = document.getElementById('refreshIcon');
+        const form = document.getElementById('submissionForm');
+        const statusMsg = document.getElementById('statusMsg');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Initial Load
+        window.onload = () => {
+            uuidInput.value = generateUUIDv7();
+        };
+
+        // Manual Refresh
+        refreshBtn.onclick = () => {
+            refreshIcon.classList.add('loader-spin');
+            setTimeout(() => {
+                uuidInput.value = generateUUIDv7();
+                refreshIcon.classList.remove('loader-spin');
+            }, 400);
+        };
+
+        // Form Submission
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('userName').value;
+            const uuid = uuidInput.value;
+            
+            // REPLACE THIS URL with your deployed Apps Script Web App URL
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw1c4H-aRqOQbdehCQYAcsVbS45ee7PRXZzMs3XlmdlaMn28H1boF-WT2ZxURfpzIlg/exec";
+
+            if (SCRIPT_URL === "YOUR_APPS_SCRIPT_WEB_APP_URL_HERE") {
+                showStatus("Please set the Google Apps Script URL in the code.", "text-amber-600");
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Submitting...";
+
+            try {
+                // Using no-cors if you don't want to handle preflight, 
+                // but standard Apps Script requires handling JSONP or standard POST
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Apps Script usually works best with no-cors for simple posts
+                    cache: 'no-cache',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, uuid, timestamp: new Date().toISOString() })
+                });
+
+                showStatus("Entry added successfully!", "text-green-600");
+                form.reset();
+                uuidInput.value = generateUUIDv7(); // Generate new for next entry
+            } catch (error) {
+                showStatus("Error connecting to database.", "text-red-600");
+                console.error(error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Add to Registry";
+            }
+        };
+
+        function showStatus(text, colorClass) {
+            statusMsg.innerText = text;
+            statusMsg.className = `mt-4 text-center text-sm ${colorClass}`;
+            statusMsg.classList.remove('hidden');
+            setTimeout(() => statusMsg.classList.add('hidden'), 5000);
+        }
     </script>
 </body>
 </html>
