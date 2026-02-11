@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UUIDv7 Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        .loader-spin {
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .input-focus:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-md glass-card rounded-2xl p-8">
+        <header class="mb-8">
+            <h1 class="text-2xl font-semibold text-slate-800">New Entry</h1>
+            <p class="text-slate-500 text-sm">Submit your data with a unique UUIDv7 ID.</p>
+        </header>
+
+        <form id="submissionForm" class="space-y-5">
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+                <input type="text" id="userName" required placeholder="John Doe" 
+                    class="w-full px-4 py-2 rounded-lg border border-slate-200 input-focus transition-all duration-200">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Generated ID (UUIDv7)</label>
+                <div class="relative flex items-center">
+                    <input type="text" id="uuidDisplay" readonly 
+                        class="w-full pl-4 pr-12 py-2 rounded-lg border border-slate-200 bg-slate-50 text-slate-500 font-mono text-sm cursor-default">
+                    
+                    <button type="button" id="refreshUuid" title="Generate New ID"
+                        class="absolute right-2 p-2 text-slate-400 hover:text-indigo-600 transition-colors">
+                        <svg id="refreshIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path>
+                            <polyline points="21 3 21 8 16 8"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn"
+                class="w-full bg-slate-900 text-white font-medium py-3 rounded-lg hover:bg-slate-800 transition-all active:scale-[0.98] disabled:opacity-50">
+                Add to Registry
+            </button>
+        </form>
+
+        <div id="statusMsg" class="mt-4 text-center text-sm hidden"></div>
+    </div>
+
+    <script>
+        /**
+         * Simple UUIDv7 Generator
+         * UUIDv7 uses: [48 bits timestamp] [4 bits version] [12 bits random] [2 bits variant] [62 bits random]
+         */
+        function generateUUIDv7() {
+            const now = Date.now();
+            const ts = now.toString(16).padStart(12, '0');
+            
+            // Random bits for the rest of the UUID
+            const r1 = Math.floor(Math.random() * 0x1000).toString(16).padStart(3, '0');
+            const r2 = Math.floor(Math.random() * 0x10000000).toString(16).padStart(8, '0');
+            const r3 = Math.floor(Math.random() * 0x10000000).toString(16).padStart(8, '0');
+
+            // Construct: timestamp (12) - version 7 + random (4) - variant 2 + random (4) - random (12)
+            // Note: Simplified logic for browser-side visualization
+            return `${ts.slice(0,8)}-${ts.slice(8,12)}-7${r1}-a${r2.slice(0,3)}-${r2.slice(3,8)}${r3.slice(0,7)}`;
+        }
+
+        const uuidInput = document.getElementById('uuidDisplay');
+        const refreshBtn = document.getElementById('refreshUuid');
+        const refreshIcon = document.getElementById('refreshIcon');
+        const form = document.getElementById('submissionForm');
+        const statusMsg = document.getElementById('statusMsg');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Initial Load
+        window.onload = () => {
+            uuidInput.value = generateUUIDv7();
+        };
+
+        // Manual Refresh
+        refreshBtn.onclick = () => {
+            refreshIcon.classList.add('loader-spin');
+            setTimeout(() => {
+                uuidInput.value = generateUUIDv7();
+                refreshIcon.classList.remove('loader-spin');
+            }, 400);
+        };
+
+        // Form Submission
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('userName').value;
+            const uuid = uuidInput.value;
+            
+            // REPLACE THIS URL with your deployed Apps Script Web App URL
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw1c4H-aRqOQbdehCQYAcsVbS45ee7PRXZzMs3XlmdlaMn28H1boF-WT2ZxURfpzIlg/exec";
+
+            if (SCRIPT_URL === "YOUR_APPS_SCRIPT_WEB_APP_URL_HERE") {
+                showStatus("Please set the Google Apps Script URL in the code.", "text-amber-600");
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Submitting...";
+
+            try {
+                // Using no-cors if you don't want to handle preflight, 
+                // but standard Apps Script requires handling JSONP or standard POST
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Apps Script usually works best with no-cors for simple posts
+                    cache: 'no-cache',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, uuid, timestamp: new Date().toISOString() })
+                });
+
+                showStatus("Entry added successfully!", "text-green-600");
+                form.reset();
+                uuidInput.value = generateUUIDv7(); // Generate new for next entry
+            } catch (error) {
+                showStatus("Error connecting to database.", "text-red-600");
+                console.error(error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Add to Registry";
+            }
+        };
+
+        function showStatus(text, colorClass) {
+            statusMsg.innerText = text;
+            statusMsg.className = `mt-4 text-center text-sm ${colorClass}`;
+            statusMsg.classList.remove('hidden');
+            setTimeout(() => statusMsg.classList.add('hidden'), 5000);
+        }
+    </script>
+</body>
+</html>
